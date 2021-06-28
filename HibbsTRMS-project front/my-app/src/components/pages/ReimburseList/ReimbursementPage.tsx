@@ -5,27 +5,28 @@ import ReimbursementsComponent from './ReimburseComponents';
 import {  useAppSelector } from '../../../hooks';
 import { selectUser, UserState } from '../../../slices/user.slice';
 
-const ReimbursementsPage: React.FC<unknown> = (Props) => {
+const ReimbursementsPage: React.FC<unknown> = (props) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [selected, setSelected] = useState<string>();
     const [requests, setRequests] = useState<Reimbursement[]>();
     const user = useAppSelector<UserState>(selectUser);
+    console.log(props)
     useEffect(() => {
-        if(user && user.role === 'Employee') {
+        if(user && user.ObjType === 'Employee') {
           (async () => { 
             const result = await getEmployeeReimbursements();
             setRequests(result); 
-            console.log(result);
-            console.log(requests)
-            console.log('Requests, ', requests);
+            //console.log(result);
+            //console.log(requests)
+            //console.log('Requests, ', requests);
           })();
         } else {
           (async () => { 
             const result = await getReimbursements();
             setRequests(result); 
-            console.log(result);
-            console.log(requests);
-            console.log('Requests, ', requests);
+            //console.log(result);
+            //console.log(requests);
+            //console.log('Requests, ', requests);
           })();
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

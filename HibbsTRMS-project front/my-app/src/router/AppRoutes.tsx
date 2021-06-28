@@ -13,6 +13,7 @@ const AppRoutes: React.FC<unknown> = (props) => {
         <HomePage />
       </Route>
       <Route exact path='/reimbursements'>
+        {console.log(props.children)}
         <ReimbursementsPage/>
       </Route>
       <Route exact path='/AddReimbursement'>

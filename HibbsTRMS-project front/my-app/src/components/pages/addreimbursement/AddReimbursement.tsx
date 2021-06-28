@@ -10,7 +10,7 @@ const AddReimbursementPage: React.FC<unknown> = (props)=> {
   const [cost, setCost] = useState<number>();
   const [reimbursementCategory, setreimbursementCategory] = useState<string>();
   const [grade, setGrade] = useState<string>();
-
+  console.log(props)
   const handleLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLocation(e.target.value);
   };
@@ -35,7 +35,7 @@ const AddReimbursementPage: React.FC<unknown> = (props)=> {
     e.preventDefault();
     // Send an Axios Request
 
-    const response = await trmsClient.post<boolean>('/api/v1/AddReimbursement', {
+    const response = await trmsClient.post<boolean>('/api/v1/reimbursement', {
       location,
       description,
       cost,

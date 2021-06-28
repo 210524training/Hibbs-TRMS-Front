@@ -60,7 +60,7 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
     }
     
   return (
-    <>{ user && user.role === 'Employee' ? (
+    <>{ user && user.ObjType === 'Employee' ? (
         <>
         { requests.map(element => (
         <div className="card listItem" id={element.id} key={element.id}  onClick={(event) => setSelected(event.currentTarget.id)}>

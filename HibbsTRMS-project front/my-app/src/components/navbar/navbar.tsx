@@ -29,13 +29,13 @@ const Navbar: React.FC<Props> = (props) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="navbar-nav">
-            { user && user.role === 'Employee' ? (
+            { user && user.ObjType === 'Employee' ? (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/reimbursements">My Reimbursements</NavLink>
+                  <NavLink className="nav-link" to="/reimbursement">My Reimbursements</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/add-reimbursement">Create a New Reimbursement</NavLink>
+                  <NavLink className="nav-link" to="/addReimbursement">Create a New Reimbursement</NavLink>
                 </li>
               </>
               ) : (
@@ -43,10 +43,10 @@ const Navbar: React.FC<Props> = (props) => {
                 </>
               )
             }
-            { user && user.role !== 'Employee' ? (
+            { user && user.ObjType !== 'Employee' ? (
               <>
                  <li className="nav-item">
-                  <NavLink className="nav-link" to="/reimbursements/">View Reimbursements</NavLink>
+                  <NavLink className="nav-link" to="/reimbursement">View Reimbursements</NavLink>
                 </li>
               </>
               ) : (

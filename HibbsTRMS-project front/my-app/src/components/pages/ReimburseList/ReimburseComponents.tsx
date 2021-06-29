@@ -63,18 +63,18 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
     <>{ user && user.ObjType === 'Employee' ? (
         <>
         { requests.map(element => (
-        <div className="card listItem" id={element.id} key={element.id}  onClick={(event) => setSelected(event.currentTarget.id)}>
-          <div>Reimbursement ID: {`${element.id} `}</div>
+        <div className="card listItem" id={element.ID} key={element.ID}  onClick={(event) => setSelected(event.currentTarget.id)}>
+          <div>Reimbursement ID: {`${element.ID} `}</div>
           <div>Employee: {`${element.username} `}</div>
-          <div>Date: {`${element.date} `}</div>
-          <div>Location: {`${element.location} `}</div>
-          <div>Description: {`${element.description} `}</div>
+          <div>Date: {`${element.Date} `}</div>
           <div>Cost: {`${element.cost} `}</div>
-          <div>Estimated amount: {`${element.amount} `}</div>
-          <div>Category: {`${element.reimbursementCategory} `}</div>
-          <div>Status: {`${element.rStat} `}</div>
+          <div>Estimated amount: {`${element.expectedAmmount} `}</div>
+          <div>Type: {`${element.eventType} `}</div>
+          <div>Status: {`${element.status} `}</div>
           <div>Grade: {`${element.grade} `}</div>
-          <div>Message: {`${element.message} `}</div>
+          <div>Description: {`${element.description} `}</div>
+          <div>Grade Format: {`${element.gradeFormat} `}</div>
+          <div>Passing Grade: {`${element.passingGrade} `}</div>
           <div>
             <form onSubmit={handleFormSubmit} >
             <input type="text" className="form-control" id="idInput" placeholder="Please enter Reimbursement ID to reject"
@@ -87,18 +87,18 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
         </>
     ): (<>
         { requests.map(element => (
-        <div className="card listItem" id={element.id} key={element.id}  onClick={(event) => setSelected(event.currentTarget.id)}>
-          <div>Reimbursement ID: {`${element.id} `}</div>
+        <div className="card listItem" id={element.ID} key={element.ID}  onClick={(event) => setSelected(event.currentTarget.id)}>
+          <div>Reimbursement ID: {`${element.ID} `}</div>
           <div>Employee: {`${element.username} `}</div>
-          <div>Date: {`${element.date} `}</div>
-          <div>Location: {`${element.location} `}</div>
-          <div>Description: {`${element.description} `}</div>
+          <div>Date: {`${element.Date} `}</div>
           <div>Cost: {`${element.cost} `}</div>
-          <div>Estimated amount: {`${element.amount} `}</div>
-          <div>Category: {`${element.reimbursementCategory} `}</div>
-          <div>Status: {`${element.rStat} `}</div>
+          <div>Estimated amount: {`${element.expectedAmmount} `}</div>
+          <div>Type: {`${element.eventType} `}</div>
+          <div>Status: {`${element.status} `}</div>
           <div>Grade: {`${element.grade} `}</div>
-          <div>Message: {`${element.message} `}</div>
+          <div>Description: {`${element.description} `}</div>
+          <div>Grade Format: {`${element.gradeFormat} `}</div>
+          <div>Passing Grade: {`${element.passingGrade} `}</div>
           <div>
           <label htmlFor="idInput" className="form-label"></label>
             <form onSubmit={handleApproveSubmit} >

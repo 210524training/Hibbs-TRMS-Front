@@ -13,6 +13,8 @@ const LoginPage: React.FC<unknown> = (props) => {
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
+    //let CurrentUser=e.target.value;
+    //return CurrentUser;
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {

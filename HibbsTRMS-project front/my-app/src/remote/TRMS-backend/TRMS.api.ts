@@ -7,12 +7,12 @@ export const sendLogin = async (username: string, password: string): Promise<Use
     username,
     password,
   });
-  console.log(user);
-  console.log(JSON.stringify(user));
-  console.log(typeof user);
-  console.log(Object.keys(user));
-  console.log(Object.getOwnPropertyNames(user));
-  console.log(user.ObjType);
+  //console.log(user);
+  //console.log(JSON.stringify(user));
+  //console.log(typeof user);
+  //console.log(Object.keys(user));
+  //console.log(Object.getOwnPropertyNames(user));
+  //console.log(user.ObjType);
   return user;
 }
 

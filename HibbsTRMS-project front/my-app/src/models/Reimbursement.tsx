@@ -1,16 +1,18 @@
 export default interface Reimbursement {
-    username: string;
-    date: number;
-    location: string;
-    description: string;
-    cost: number;
-    amount: number;
-    reimbursementCategory: Category;
-    rStat: rStat;
-    grade: string;
-    message: string;
-    id: string;
+     ObjType: "Reimbursement",
+     username:string,
+     realName:string,
+     ID: string,
+     cost: number,
+     status: "Pending" | "Approved By Supervisor"|'Approved By Department Head'|'Approved By Benefits Controller' | "Rejected" | "Awarded",
+     eventType:"University Course" |"Seminar" | "Certification" | "Cert Prep" | "Technical Training" | "Other",
+     reimbursePortion: 0.8 | 0.6 | 0.75 | 1 | 0.9 | 0.3,
+     expectedAmmount:number,
+     Date: Date,
+     description: string|null,
+     grade:string,
+     gradeFormat:"letter"|"percent"|"pass/fail"|"other",
+     passingGrade:string,
+     presentationSubmission:File|null,
 }
 
-export type Category = 'University Course' | 'Seminar' | 'Certification Preparation Class' | 'Certification' | 'Technical Training' | 'Other';
-export type rStat = 'initiated' | 'approved by DirSupervisor' | 'approved by DepHead' | 'approved!' | 'rejected';

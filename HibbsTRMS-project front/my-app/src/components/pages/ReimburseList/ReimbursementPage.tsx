@@ -10,23 +10,23 @@ const ReimbursementsPage: React.FC<unknown> = (props) => {
     const [selected, setSelected] = useState<string>();
     const [requests, setRequests] = useState<Reimbursement[]>();
     const user = useAppSelector<UserState>(selectUser);
-    console.log(props)
+    //console.log(props)
     useEffect(() => {
         if(user && user.ObjType === 'Employee') {
           (async () => { 
-            const result = await getEmployeeReimbursements();
+            const result = await getEmployeeReimbursements(user.username);
             setRequests(result); 
-            //console.log(result);
-            //console.log(requests)
-            //console.log('Requests, ', requests);
+            console.log('Results: '+result);
+            //console.log(requests);
+            console.log('Requests: '+requests);
           })();
         } else {
           (async () => { 
             const result = await getReimbursements();
             setRequests(result); 
-            //console.log(result);
+            console.log("Results: "+result);
             //console.log(requests);
-            //console.log('Requests, ', requests);
+            console.log('Requests: '+requests);
           })();
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

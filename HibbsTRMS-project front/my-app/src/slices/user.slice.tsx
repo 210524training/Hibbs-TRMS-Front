@@ -8,14 +8,15 @@ export type UserState = User | null;
 export type LoginCredentials = {
   username: string;
   password: string;
+  job:string;
 }
 
 export const loginAsync = createAsyncThunk<User, LoginCredentials>(
   'user/login',
-  async ({username, password}, thunkAPI) => {
-
+  async ({username, password,job}, thunkAPI) => {
+    
     try {
-      const response = await sendLogin(username, password);
+      const response = await sendLogin(username, password,job);
 
       return response;
     } catch(error) {

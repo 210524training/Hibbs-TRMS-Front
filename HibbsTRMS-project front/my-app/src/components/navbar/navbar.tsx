@@ -32,7 +32,7 @@ const Navbar: React.FC<Props> = (props) => {
             { user && user.ObjType === 'Employee' ? (
               <>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/reimbursement">My Reimbursements</NavLink>
+                  <NavLink className="nav-link" to="/reimbursements">My Reimbursements</NavLink>
                 </li>
                 <li className="nav-item">
                   <NavLink className="nav-link" to="/addReimbursement">Create a New Reimbursement</NavLink>
@@ -46,7 +46,7 @@ const Navbar: React.FC<Props> = (props) => {
             { user && user.ObjType !== 'Employee' ? (
               <>
                  <li className="nav-item">
-                  <NavLink className="nav-link" to="/reimbursement">View Reimbursements</NavLink>
+                  <NavLink className="nav-link" to="/reimbursements">View Reimbursements</NavLink>
                 </li>
               </>
               ) : (

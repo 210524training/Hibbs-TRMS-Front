@@ -4,7 +4,6 @@ import HomePage from '../components/pages/home-page/HomePage';
 import ReimbursementsPage from '../components/pages/ReimburseList/ReimbursementPage';
 import AddReimbursementPage from '../components/pages/addreimbursement/AddReimbursement';
 import LoginPage from '../components/pages/login-page/LoginPage';
-import {v4} from 'uuid';
 
 const AppRoutes: React.FC<unknown> = (props) => {
 
@@ -19,7 +18,7 @@ const AppRoutes: React.FC<unknown> = (props) => {
       </Route>
       <Route exact path='/AddReimbursement'>
         {/*console.log(props.children)*/}
-        <AddReimbursementPage children={{ID:v4(),ObjType:"Reimbursement"}}/>
+        <AddReimbursementPage />
       </Route>
       <Route path='/login'>
         <LoginPage />

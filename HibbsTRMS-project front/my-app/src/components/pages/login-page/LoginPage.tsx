@@ -14,8 +14,6 @@ const LoginPage: React.FC<unknown> = (props) => {
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
-    //let CurrentUser=e.target.value;
-    //return CurrentUser;
   };
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,10 +51,13 @@ const LoginPage: React.FC<unknown> = (props) => {
           <br></br>
           <label>Employee:</label>
           <input type="radio" value="Employee" name="job" onChange={handleJobChange} required/>
+          <br></br>
           <label>  Supervisor:</label>
           <input type="radio" value="Supervisor" name="job" onChange={handleJobChange} required/>
+          <br></br>
           <label>  Department Head:</label>
           <input type="radio" value="Department Head" name="job" onChange={handleJobChange} required/>
+          <br></br>
           <label>  Benefits Controller:</label>
           <input type="radio" value="Benefits Controller" name="job"onChange={handleJobChange} required/>
           

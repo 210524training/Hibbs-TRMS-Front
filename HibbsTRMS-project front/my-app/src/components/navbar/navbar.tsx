@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 //import './Navbar.css'
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logout, selectUser, UserState } from '../../slices/user.slice';
+import '../../style.css';
 
 type Props = {
 }
@@ -21,7 +22,7 @@ const Navbar: React.FC<Props> = (props) => {
   }
 
   return (
-    <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <nav className="form">
       <div id="nav" className="container-fluid">
         <NavLink className="navbar-brand" to="/">Home</NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -58,7 +59,7 @@ const Navbar: React.FC<Props> = (props) => {
           <ul className="navbar-nav ms-auto">
             { !user ? (
               <>
-                <li className="nav-item">
+                <li className="form button">
                   <NavLink className="nav-link" to="/login">Login</NavLink>
                 </li>
               </>

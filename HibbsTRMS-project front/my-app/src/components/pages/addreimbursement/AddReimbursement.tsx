@@ -28,17 +28,7 @@ const AddReimbursementPage: React.FC<unknown> = (props)=> {
   const[presentationSubmission,setPresentationSubmission]=useState<File>();
   
   
- /*
-  const handleObjTypeChange=(e: ChangeEvent<HTMLInputElement>)=>{
-    setObjType(e.target.value);
-  };
-  const handleusernameChange=(e:ChangeEvent<HTMLInputElement>)=>{
-    setUserName(e.target.value);
-  };
-  const handleIDChange=(e:ChangeEvent<HTMLInputElement>)=>{
-    setID(e.target.value);
-  };
-  */
+ 
   const handleCostChange=(e:ChangeEvent<HTMLInputElement>)=>{
     setCost(parseInt(e.target.value));
   };
@@ -106,31 +96,7 @@ const AddReimbursementPage: React.FC<unknown> = (props)=> {
     
 
     
-  //console.log(store.getState())
-  //useSelector(store)
-    /*
-    setObjType('Reimbursement');
-    setStatus("Pending");
-    setID(v4());
-    */
-    
-    /*handleTypeChange(e) {
-	setType(e.target.value)
-
-
-useEffect( () => {
-	// set adjusted amount
-}, [type]*/
-
   
-  /*
-  const handleReimbursePortionChange=(e:ChangeEvent<HTMLInputElement>)=>{
-    setReimbursePortion(e.target.value);
-  };
-  const handleExpectedAmmountChange=(e:ChangeEvent<HTMLInputElement>)=>{
-    setExpectedAmmount(e.target.value);
-  };
-  */
   const handleDateChange=(e:ChangeEvent<HTMLInputElement>)=>{
     setDate(e.target.value);
   };
@@ -151,24 +117,6 @@ useEffect( () => {
     setPresentationSubmission(e.target.files[0]);
 
   };
-    
-    
-    
-    /*let file;
-    setPresentationSubmission(()=>{
-      if(e.target.files![0]!==null){
-        return e.target.files![0];
-      }else{
-        return file=require('./dumm.txt');
-      };
-    });*/
-  
-
-  /*useEffect(()=>{
-
-  })*/
-  
-
   const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (presentationSubmission) {
@@ -193,21 +141,17 @@ useEffect( () => {
           passingGrade,
           presentationSubmission,
         });
-         console.log('FILE IS SENT: ')
+         console.log('SENT file: '+presentationSubmission);
       };
     }
 
-    // Send an Axios Request
-    console.log(presentationSubmission)
+    
     
 
     history.push('/');
   }
 
-  //console.log('location: ', location);
-  //console.log('description: ', description);
-  //console.log('cost: ', cost);
-  //console.log('reimbursementCategory: ', reimbursementCategory);
+  
 
   return (
     <div className='container' id='register-form'>
@@ -231,9 +175,8 @@ useEffect( () => {
         </div>
           <div className="mb-3">
           <label htmlFor="EventTypeInput" className="form-label">Education Type</label>
-          {/* <input type="text" className="form-control" onChange={handlereimbursementCategoryChange} /> */}
+          
           <select id="EventTypeInput" className="form-control" onChange={handleTypeChange} required>
-             {/* export type Category = 'University Course' | 'Seminar' | 'Certification Preparation Class' | 'Certification' | 'Technical Training' | 'Other';   */}
              <option value="none" selected disabled hidden>Choose an option</option>
              <option value="University Course">University Course</option>
              <option value="Seminar">Seminar</option>
@@ -245,9 +188,9 @@ useEffect( () => {
         </div>
         <div className="mb-3">
           <label htmlFor="GradeFormatInput" className="form-label">Grade Format</label>
-          {/* <input type="text" className="form-control" onChange={handlereimbursementCategoryChange} /> */}
+          
           <select id="GradeFormatInput" className="form-control" onChange={handleGradeFormatChange} required>
-             {/* export type Category = 'University Course' | 'Seminar' | 'Certification Preparation Class' | 'Certification' | 'Technical Training' | 'Other';   */}
+             
              <option value="none" selected disabled hidden>Choose an option</option>
              <option value="letter">Letter Grade</option>
              <option value="percent">Percentage</option>

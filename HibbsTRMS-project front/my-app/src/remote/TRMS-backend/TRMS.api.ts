@@ -34,27 +34,24 @@ export const sendLogin = async (username: string, password: string,job:string): 
     return user;
   }
   
-  //console.log(user);
-  //console.log(JSON.stringify(user));
-  //console.log(typeof user);
-  //console.log(Object.keys(user));
-  //console.log(Object.getOwnPropertyNames(user));
-  //console.log(user.ObjType);
-  
 }
 
 export const getReimbursements = async(): Promise<Reimbursement[]> => {
   const result = await trmsClient.get<Reimbursement[]>('/api/v1/reimbursement/getall');
-  //console.log(result.data);
+  
+  return result.data;
+}
+export const getReimbursementsByStatus = async(status:string): Promise<Reimbursement[]> => {
+  const result = await trmsClient.get<Reimbursement[]>(`/api/v1/reimbursement/status/${status}`);
+  console.log(result.data);
+  
   return result.data;
 }
 export const getEmployeeReimbursements = async(username: string): Promise<Reimbursement[]> => {
   const result = await trmsClient.get<Reimbursement[]>(`/api/v1/reimbursement/user/${username}`);
-  console.log(result);
+  console.log(result.data);
   return result.data;
-}//   /api/v1/reimbursement?username=${username}
-//    /api/vi/reimbursement/:${username}
-export const deleteReimbursement = async(id: string): Promise<void> => {
-  console.log('API id: ', id);
-  await trmsClient.delete<boolean>(`/api/v1/reimbursement/:${id}`);
+}
+export const deleteReimbursement = async(ID: string): Promise<void> => {
+  await trmsClient.delete<boolean>(`/api/v1/reimbursement/${ID}`);
 }

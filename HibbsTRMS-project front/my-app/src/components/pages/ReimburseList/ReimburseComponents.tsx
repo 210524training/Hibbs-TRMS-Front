@@ -6,58 +6,64 @@ import { deleteReimbursement } from '../../../remote/TRMS-backend/TRMS.api';
 import { useAppSelector } from '../../../hooks';
 import { selectUser, UserState } from '../../../slices/user.slice';
 import trmsClient from '../../../remote/TRMS-backend/TRMS.client';
-
+const makebencowork="ApprovedByDepartmentHead";
 type Props = {
   requests: Reimbursement[];
   setSelected: Dispatch<SetStateAction<string | undefined>>;
 }
 
 const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
-    const[id, setId] = useState<string>('');
-    const [amount, setAmount] = useState<number>()
-    const [message, setMessage] = useState<string>();
+    const[ID, setID] = useState<string>('');
+    const[status,setStatus]=useState<string>('');
+    const[ObjType,setObjType]=useState<string>("Reimbursement");
+    
+    
     const history = useHistory();
     const user = useAppSelector<UserState>(selectUser);
+    let job;
+    if(!user){
+      job=null;
+    }else{
+      job=user.ObjType;
+    }
+    let approveStatus="Pending";
+    if(job==="Employee"){
+      approveStatus="Pending";
+    }else if(job==="Supervisor"){
+      approveStatus="ApprovedBySupervisor";
+    }else if(job==="Department Head"){
+      approveStatus=makebencowork;
+    }else if(job==="Benefits Controller"){
+      approveStatus="Awarded";
+    }else{approveStatus="Pending"}
 
     const handleIdChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setId(e.target.value);
-    }
-    const handleAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setAmount(e.target.valueAsNumber);
-    }
-    const handleMsgChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        setMessage(e.target.value);
-    }
-
-    const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    
-        await deleteReimbursement(id);
-    
-        history.push('/');
-    }
-    const handleApproveSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        setID(e.target.value);
+    };
+    const handleStatusChange=(e:ChangeEvent<HTMLInputElement>)=>{
+      setStatus(e.target.value);
+    };
+   
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        const response = await trmsClient.put<boolean>('/api/v1/reimbursements', {
-            id,
-            amount,
+        const response = await trmsClient.patch<boolean>('/api/v1/reimbursement/patch', {
+            ID,
+            status,
         });
 
-        console.log(response.data);
-        history.push('/');
-    }
-    const handleRejectSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
         
-        const response = await trmsClient.patch<boolean>('/api/v1/reimbursements', {
-            id,
-            message,
-        });
-
-        console.log(response.data);
         history.push('/');
     }
+    const handleDeleteSubmit = async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      
+      deleteReimbursement(ID);
+
+      
+      history.push('/');
+  }
+    
     
   return (
     <>{ user && user.ObjType === 'Employee' ? (
@@ -68,7 +74,7 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
           <div>Employee: {`${element.username} `}</div>
           <div>Date: {`${element.Date} `}</div>
           <div>Cost: {`${element.cost} `}</div>
-          <div>Estimated amount: {`${element.expectedAmmount} `}</div>
+          <div>Estimated amount: {`${element.expectedAmount} `}</div>
           <div>Type: {`${element.eventType} `}</div>
           <div>Status: {`${element.status} `}</div>
           <div>Grade: {`${element.grade} `}</div>
@@ -76,7 +82,7 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
           <div>Grade Format: {`${element.gradeFormat} `}</div>
           <div>Passing Grade: {`${element.passingGrade} `}</div>
           <div>
-            <form onSubmit={handleFormSubmit} >
+            <form onSubmit={handleDeleteSubmit} >
             <input type="text" className="form-control" id="idInput" placeholder="Please enter Reimbursement ID to reject"
               onChange={handleIdChange} />
             <input type="submit" className="btn btn-danger" value='Delete Request' />
@@ -92,7 +98,7 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
           <div>Employee: {`${element.username} `}</div>
           <div>Date: {`${element.Date} `}</div>
           <div>Cost: {`${element.cost} `}</div>
-          <div>Estimated amount: {`${element.expectedAmmount} `}</div>
+          <div>Estimated amount: {`${element.expectedAmount} `}</div>
           <div>Type: {`${element.eventType} `}</div>
           <div>Status: {`${element.status} `}</div>
           <div>Grade: {`${element.grade} `}</div>
@@ -101,41 +107,32 @@ const ReimbursementComponent: React.FC<Props> = ({requests, setSelected}) => {
           <div>Passing Grade: {`${element.passingGrade} `}</div>
           <div>
           <label htmlFor="idInput" className="form-label"></label>
-            <form onSubmit={handleApproveSubmit} >
+            <form onSubmit={handleSubmit} >
                 <div>
                     <div>
+                      <label>Please Confirm the ID of the request you're reviewing:</label>
                         <input type="text" className="form-control" id="idInput" placeholder="Reimbursement ID"
-                    onChange={handleIdChange} />
+                    onChange={handleIdChange} required/>
                     </div>
                     <div>
-                        <input type="text" className="form-control" id="amountInput" placeholder="Amount"
-                        onChange={handleAmountChange} />
+                    <label>Approve?</label>
+                    <br></br>
+                    <label>Accept:</label>
+                    <input type="radio" value={approveStatus} name="approval" onChange={handleStatusChange} required/>
+                    <label>     Reject:</label>
+                    <input type="radio" value="Rejected" name="approval" onChange={handleStatusChange} required/>
                     </div>
-                    <input type="submit" className="btn btn-success" value='Approve Request' />
+                    <input type="submit" className="btn btn-success" value='Submit Decision' />
                 </div>
             </form>
           </div>
-          <div>  
-          <form onSubmit={handleRejectSubmit} >
-                <div>
-                    <div>
-                        <input type="text" className="form-control" id="idInput" placeholder="Reimbursement ID"
-                    onChange={handleIdChange} />
-                    </div>
-                    <div>
-                        <input type="text" className="form-control" id="idInput" placeholder="Please enter a reason for your rejeciton."
-                    onChange={handleMsgChange} />
-                    </div>
-                    <input type="submit" className="btn btn-danger" value='Reject Request' />
-                </div>
-            </form>
-          </div>
+          
         </div>
       ))} 
         </>)} 
         
      </>
   )
-}
+};
 
 export default ReimbursementComponent;

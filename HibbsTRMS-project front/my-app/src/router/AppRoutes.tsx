@@ -4,12 +4,15 @@ import HomePage from '../components/pages/home-page/HomePage';
 import ReimbursementsPage from '../components/pages/ReimburseList/ReimbursementPage';
 import AddReimbursementPage from '../components/pages/addreimbursement/AddReimbursement';
 import LoginPage from '../components/pages/login-page/LoginPage';
+import '../style.css'
 
 const AppRoutes: React.FC<unknown> = (props) => {
 
   return (
     <Switch>
+      <div className="form">
       <Route exact path='/'>
+        
         <HomePage />
       </Route>
       <Route exact path='/reimbursements'>
@@ -26,6 +29,7 @@ const AppRoutes: React.FC<unknown> = (props) => {
       <Route path='/'>
         <Redirect to='/' />
       </Route>
+      </div>
     </Switch>
   );
 };

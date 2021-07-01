@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './components/navbar/navbar';
 import AppRoutes from './router/AppRoutes';
 import store from './store';
+import './style.css'
 
 // There are 2 different kinds of Components: Class & Function
 // This Component here is a Function Component
@@ -14,8 +15,10 @@ const App: React.FC = (): JSX.Element => {
   return (
     <Provider store={store}>
       <Router>
+        <div className="greenBox">
         <Navbar />
         <AppRoutes />
+        </div>
       </Router>
     </Provider>
   );
